@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -101,7 +102,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+# token authentication
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        '',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        '',
+    ],
+}
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 

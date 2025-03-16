@@ -32,6 +32,6 @@ class BookDeleteView(generics.DestroyAPIView):
     serializer_class = BookSerializer
 
 # remove
-filters.OrderingFilter
-filters.SearchFilter
-title", "author", "publication_year
+# filters.OrderingFilter
+# filters.SearchFilter
+# title", "author", "publication_year

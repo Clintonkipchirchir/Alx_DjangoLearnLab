@@ -34,3 +34,4 @@ class BookDeleteView(generics.DestroyAPIView):
 # remove
 filters.OrderingFilter
 filters.SearchFilter
+title", "author", "publication_year

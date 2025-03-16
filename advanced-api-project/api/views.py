@@ -5,6 +5,26 @@ from .serializers import BookSerializer
 
 # Create your views here.
 
-class CustomListView(generics.ListAPIView):
+class BookListView(generics.ListAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+
+class BookDetailView(generics.RetrieveAPIView):
+    serializer_class = BookSerializer
+
+    def get_object(self):
+        book = Book.objects.get(pk=self.kwargs['pk'])
+        return book
+
+class BookCreateView(generics.CreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+class BookUpdateView(generics.UpdateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+class BookDeleteView(generics.DestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer

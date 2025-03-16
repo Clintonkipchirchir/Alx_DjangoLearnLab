@@ -7,12 +7,13 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = ('title', 'publication_year', 'author')
 
-    def validate(self, data):
+    def validate_publication_year(self,value):
         today = datetime.date.today()
         year = today.year
-        if data['publication_year'] > year:
+        pub_year = int(value)
+        if pub_year == year:
             raise serializers.ValidationError(f"The year of publication must be on or before {year}")
-        return data
+        return value
 
 class AuthorSerializer(serializers.ModelSerializer):
     books = BookSerializer(many=True, read_only=True)

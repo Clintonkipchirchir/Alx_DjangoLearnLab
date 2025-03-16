@@ -79,3 +79,6 @@ class BookAPITestCase(APITestCase):
         response = self.client.get(self.book_list_url, {"search": "Test Book"})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertGreaterEqual(len(response.data), 1)
+
+
+self.client.login

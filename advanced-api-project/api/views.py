@@ -33,3 +33,4 @@ class BookDeleteView(generics.DestroyAPIView):
 
 # remove
 filters.OrderingFilter
+filters.SearchFilter

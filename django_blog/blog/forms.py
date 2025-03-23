@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from .models import Post
 
 
 class LoginForm(AuthenticationForm):
@@ -29,4 +30,9 @@ class RegisterForm(UserCreationForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Confirm password',
         }))
+
+class Post(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = "__all__"
 

@@ -5,7 +5,9 @@ from .forms import RegisterForm, LoginForm
 
 def profile(request):
     posts = Post.object.all()
-    pass
+    return render(request, 'blog/profile.html',{
+        'posts': posts
+    })
 
     
 
@@ -23,4 +25,3 @@ def registration(request):
         'form': form
     })
 
-def profile*()

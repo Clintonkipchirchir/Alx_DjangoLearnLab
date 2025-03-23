@@ -25,3 +25,5 @@ def registration(request):
         'form': form
     })
 
+def logout(request):
+    return render(request, 'blog/logout.html')

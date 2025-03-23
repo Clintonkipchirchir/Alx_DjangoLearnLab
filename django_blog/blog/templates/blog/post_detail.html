@@ -78,7 +78,16 @@
       </div>
     </article>
   </div>
-  
+  <!-- Example snippet to display tags in post detail view -->
+  <div class="post-tags">
+    <strong>Tags:</strong>
+    {% for tag in post.tags.all %}
+      <a href="{% url 'tagged_posts' tag.name %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+    {% empty %}
+      <span>No tags.</span>
+    {% endfor %}
+  </div>
+
   <footer>
     <p>&copy; 2025 My Blog. All Rights Reserved.</p>
   </footer>

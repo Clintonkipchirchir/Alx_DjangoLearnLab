@@ -2,8 +2,37 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
-from .models import Post, Comment
+from .models import Post, Comment, Tag
 from .forms import RegisterForm, LoginForm
+from django.db.models import Q
+
+
+def search_posts(request):
+    query = request.GET.get('q', '')
+    results = Post.objects.all()
+    
+    if query:
+        results = results.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(tags__name__icontains=query)
+        ).distinct()
+    
+    context = {
+        'results': results,
+        'query': query,
+    }
+    return render(request, 'blog/search_results.html', context)
+
+def tagged_posts(request, tag_name):
+    # Filter posts where the tag name matches (case-insensitive)
+    posts = Post.objects.filter(tags__name__iexact=tag_name)
+    context = {
+        'tag': tag_name,
+        'posts': posts,
+    }
+    return render(request, 'posts/tagged_posts.html', context)
+
 
 @login_required
 def profile(request):

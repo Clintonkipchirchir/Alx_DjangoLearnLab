@@ -26,6 +26,11 @@
         <!-- Page-specific content goes here -->
         {% endblock %}
     </div>
+    <!-- templates/base.html or any template where you want the search bar -->
+    <form method="get" action="{% url 'search_posts' %}">
+        <input type="text" name="q" placeholder="Search posts..." value="{{ query|default:'' }}">
+        <button type="submit">Search</button>
+    </form>
 
     <footer>
         <p>&copy; 2024 Django Blog</p>

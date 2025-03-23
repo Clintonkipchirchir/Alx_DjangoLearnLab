@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from .models import Post, Comment
-
+from taggit.forms import TagWidget
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
@@ -34,7 +34,10 @@ class RegisterForm(UserCreationForm):
 class Post(forms.ModelForm):
     class Meta:
         model = Post
-        fields = "__all__"
+        fields = ["title" ,"content" ,"published_date" ,"author", "tag"]
+        widgets = {
+            'tags': TagWidget(),  # This widget makes tag entry user-friendly.
+        }
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -44,4 +47,4 @@ class CommentForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'rows': 4, 'cols': 40, 'placeholder': 'Enter your comment here...'}),
         }
     
-    
+      

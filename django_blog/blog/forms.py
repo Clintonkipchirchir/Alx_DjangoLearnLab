@@ -37,6 +37,11 @@ class Post(forms.ModelForm):
         fields = "__all__"
 
 class CommentForm(forms.ModelForm):
-     class Meta:
+    class Meta:
         model = Comment
-        fields = "__all__"
+        fields = ['author', 'email', 'content']  # Adjust fields as necessary
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 4, 'cols': 40, 'placeholder': 'Enter your comment here...'}),
+        }
+    
+    

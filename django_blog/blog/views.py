@@ -42,10 +42,7 @@ class PostListView(ListView):
 @login_required
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = [
-        'title',
-        'content',
-        ]
+    fields = '__all__'
 
     def form_valid(self, form):
         form.instance.author = self.request.user

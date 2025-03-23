@@ -51,6 +51,24 @@
       background-color: #333;
       color: white;
     }
+    
+    form {
+      display: inline-block;
+      margin-top: 20px;
+    }
+    
+    form input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #333;
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    form input[type="submit"]:hover {
+      background-color: #555;
+    }
   </style>
 </head>
 <body>
@@ -64,9 +82,13 @@
   </header>
   
   <div class="content">
-    <h2>You have been logged out.</h2>
-    <p>Thank you for visiting. You can log in again at any time.</p>
-    <p><a href="login.html">Return to Login</a></p>
+    <h2>Are you sure you want to log out?</h2>
+    <form action="/logout" method="post">
+      <!-- CSRF Token -->
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="submit" value="Logout">
+    </form>
+    <p><a href="profile.html">Cancel</a></p>
   </div>
   
   <footer>

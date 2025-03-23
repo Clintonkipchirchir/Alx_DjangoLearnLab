@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>View Post</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #333;
+      padding: 10px;
+      text-align: center;
+    }
+    header nav ul {
+      list-style-type: none;
+    }
+    header nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+    .content {
+      margin: 20px;
+    }
+    article {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .actions a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="posts.html">All Posts</a></li>
+        <li><a href="create_post.html">Create New Post</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div class="content">
+    <article>
+      <h2>Post Title</h2>
+      <p><small>Published on: January 1, 2025</small></p>
+      <p>Full content of the post goes here. This is a detailed view of the post with all the necessary text, images, or any media included by the author.</p>
+      <div class="actions">
+        <a href="edit_post.html?id=1">Edit</a>
+        <a href="delete_post.html?id=1">Delete</a>
+      </div>
+    </article>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 My Blog. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

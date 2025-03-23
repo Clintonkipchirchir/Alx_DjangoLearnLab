@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create New Post</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #333;
+      padding: 10px;
+      text-align: center;
+    }
+    header nav ul {
+      list-style-type: none;
+    }
+    header nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+    .content {
+      margin: 20px;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    form input[type="text"],
+    form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    form textarea {
+      height: 200px;
+      resize: vertical;
+    }
+    form input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      cursor: pointer;
+    }
+    form input[type="submit"]:hover {
+      background-color: #555;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="posts.html">All Posts</a></li>
+        <li><a href="create_post.html">Create New Post</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div class="content">
+    <h2>Create New Post</h2>
+    <form action="/posts/create" method="post">
+      <!-- CSRF Token -->
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      
+      <label for="title">Post Title:</label>
+      <input type="text" id="title" name="title" required>
+      
+      <label for="content">Content:</label>
+      <textarea id="content" name="content" required></textarea>
+      
+      <input type="submit" value="Create Post">
+    </form>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 My Blog. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

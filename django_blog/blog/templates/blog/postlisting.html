@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All Blog Posts</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #333;
+      padding: 10px;
+      text-align: center;
+    }
+    header nav ul {
+      list-style-type: none;
+    }
+    header nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+    .content {
+      margin: 20px;
+    }
+    .post-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .post-list li {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    .post-list li a {
+      text-decoration: none;
+      color: #333;
+      font-size: 20px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="create_post.html">Create New Post</a></li>
+        <li><a href="posts.html">All Posts</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div class="content">
+    <h2>Blog Posts</h2>
+    <ul class="post-list">
+      <!-- Example post items; these would be generated dynamically -->
+      <li>
+        <a href="view_post.html?id=1">Post Title 1</a>
+        <p>Short description or summary of post 1...</p>
+      </li>
+      <li>
+        <a href="view_post.html?id=2">Post Title 2</a>
+        <p>Short description or summary of post 2...</p>
+      </li>
+      <!-- Additional posts go here -->
+    </ul>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 My Blog. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

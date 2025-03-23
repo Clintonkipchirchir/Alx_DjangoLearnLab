@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Delete Post</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #333;
+      padding: 10px;
+      text-align: center;
+    }
+    header nav ul {
+      list-style-type: none;
+    }
+    header nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+    .content {
+      margin: 20px;
+      text-align: center;
+    }
+    form {
+      display: inline-block;
+      margin-top: 20px;
+    }
+    form input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #333;
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      cursor: pointer;
+    }
+    form input[type="submit"]:hover {
+      background-color: #555;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="posts.html">All Posts</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div class="content">
+    <h2>Are you sure you want to delete this post?</h2>
+    <p><strong>{{ post_title }}</strong></p>
+    <form action="/posts/delete?id={{ post_id }}" method="post">
+      <!-- CSRF Token -->
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="submit" value="Delete Post">
+    </form>
+    <p><a href="view_post.html?id={{ post_id }}">Cancel</a></p>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 My Blog. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

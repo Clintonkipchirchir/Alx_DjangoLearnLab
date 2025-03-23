@@ -5,12 +5,13 @@ from . import views
 from .forms import LoginForm
 from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView
 from .views import CommentDetailView, CommentCreateView, CommentUpdateView, CommentDeleteView
-from .views import tagged_posts, search_posts
+from .views import tagged_posts, search_posts, PostByTagListView
 app_name = 'blog'
 
 urlpatterns = [
     path('',PostListView.as_view(), name="blog-home"),
-    path('post/tag/<str:tag_name>/', tagged_posts, name='tagged_posts'),
+    path("post/tags/<slug:tag_slug>/", PostByTagListView.as_view(), name="post_by_tag"),
+
     path('post/search/', search_posts, name='search_posts'),
     path('profile/', views.profile, name='profile'),
     path('register/', views.registration, name='register'),

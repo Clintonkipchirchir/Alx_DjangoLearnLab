@@ -34,6 +34,24 @@ def tagged_posts(request, tag_name):
     return render(request, 'posts/tagged_posts.html', context)
 
 
+class PostByTagListView(ListView):
+    model = Post
+    template_name = 'blog/post_by_tag_list.html'  # Customize your template path
+    context_object_name = 'posts'
+    paginate_by = 10  # Optional: paginate if you have many posts
+
+    def get_queryset(self):
+        # Extract the tag slug from URL parameters
+        tag_slug = self.kwargs.get('tag_slug')
+        # Filter posts based on the tag slug (case-insensitive)
+        return Post.objects.filter(tags__slug__iexact=tag_slug).distinct()
+
+    def get_context_data(self, **kwargs):
+        # Add additional context to the template, e.g., the tag slug
+        context = super().get_context_data(**kwargs)
+        context['tag_slug'] = self.kwargs.get('tag_slug')
+        return context
+    
 @login_required
 def profile(request):
     posts = Post.object.all()

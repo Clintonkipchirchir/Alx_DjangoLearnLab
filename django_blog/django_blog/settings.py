@@ -78,7 +78,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    'new': {
+        'ENGINE': '',
+        'NAME': 'myDBname',
+        'USER': 'myUser',
+        'PASSWORD': 'myPass',
+        'HOST': '127.0.0.1',
+        'PORT': '8000',
+    },
 }
 
 
@@ -120,7 +128,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / 'static',
 ]
 
 

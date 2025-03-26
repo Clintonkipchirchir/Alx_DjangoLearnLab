@@ -37,4 +37,10 @@ class LoginSerializer(serializers.Serializer):
         user = authenticate(username=username, email=email, password=password)
         if user and user.is_active:
             token, created = Token.objects.get_or_create(user=user)
-            
+
+
+# profile serializer
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ['id', 'username', 'email', 'bio', 'profiel_picture', 'followers']

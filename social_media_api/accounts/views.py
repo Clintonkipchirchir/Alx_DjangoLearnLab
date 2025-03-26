@@ -24,12 +24,12 @@ def register_user(request):
         return Response({"token": token.key, "user": serializer.data})
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# login user
+# login user 
 @api_view(['POST'])
 def login_user(request):
     user = get_object_or_404(User, username=request.data['username'])
     if not user.check_password(request.data['password']):
-        return Response({"detail": "Ivalid details"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"detail": "Invalid details"}, status=status.HTTP_400_BAD_REQUEST)
     token, created = Token.objects.get_or_create(user=user)
     serializer = UserSerializer(instance=user)
     return Response({"token": token.key, "user": serializer.data})

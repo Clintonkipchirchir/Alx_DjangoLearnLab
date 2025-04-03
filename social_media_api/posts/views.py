@@ -96,11 +96,11 @@ def delete_comment(request, pk):
 
 
 # dummy code
-class MethodViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
+# class MethodViewSet(viewsets.ModelViewSet):
+#     permission_classes = [IsAuthenticated]
+#     authentication_classes = [TokenAuthentication]
     
-    @action(detail=False, methods=['get'], url_path='method-path')
-    def list(self, request):
-        # your code here
-        pass
+#     @action(detail=False, methods=['get'], url_path='method-path')
+#     def list(self, request):
+#         # your code here
+#         pass

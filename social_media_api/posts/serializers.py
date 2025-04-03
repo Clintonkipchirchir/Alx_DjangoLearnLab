@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Post, Comment
 
-class PostSerializer(serializers,ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post  
         feilds = ['id', 'author', 'title', 'content', 'created_at',  'updated_at']

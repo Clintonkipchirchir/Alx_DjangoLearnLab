@@ -43,4 +43,4 @@ class LoginSerializer(serializers.Serializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ['id', 'username', 'email', 'bio', 'profiel_picture', 'followers']
+        fields = ['id', 'username', 'email', 'bio', 'profile_picture']

@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import PostSerializer, CommentSerializer
 from rest_framework import status
 from .models import Post, Comment
-
+from rest_framework import viewsets
 
 # post creation list update delete
 @api_view(['POST'])
@@ -93,3 +93,14 @@ def delete_comment(request, pk):
     serializer = CommentSerializer(post, data=request.data)
     comment.delete()
     return Response({"message": "Comment succesfully deleted"}, status=status.HTTP_203_NO_CONTENT)
+
+
+# dummy code
+class MethodViewSet(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    
+    @action(detail=False, methods=['get'], url_path='method-path')
+    def list(self, request):
+        # your code here
+        pass

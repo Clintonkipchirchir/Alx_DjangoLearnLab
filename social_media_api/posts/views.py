@@ -96,7 +96,7 @@ def delete_comment(request, pk):
 
 
 # dummy code
-class MethodViewSet(viewsets.ViewSet):
+class MethodViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
     

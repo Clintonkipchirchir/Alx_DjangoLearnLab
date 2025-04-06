@@ -4,11 +4,11 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated 
 
 from .serializers import UserSerializer, ProfileSerializer
-from rest_framework import status, generics
+from rest_framework import status, generics, permissions
+from django.http import JsonResponse
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from .models import CustomUser
-from django.http import JsonResponse
 
 
 User = get_user_model()
@@ -49,7 +49,7 @@ def profileview(request):
 
 class FollowUserView(generics.GenericAPIView):
     queryset = CustomUser.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, user_id):
         user_to_follow = get_object_or_404(self.get_queryset(), id=user_id)
@@ -65,7 +65,7 @@ class FollowUserView(generics.GenericAPIView):
 
 class UnfollowUserView(generics.GenericAPIView):
     queryset = CustomUser.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, user_id):
         user_to_unfollow = get_object_or_404(self.get_queryset(), id=user_id)

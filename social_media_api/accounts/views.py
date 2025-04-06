@@ -7,7 +7,8 @@ from .serializers import UserSerializer, ProfileSerializer
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
-
+from .models import CustomUser
+from django.http import JsonResponse
 
 
 User = get_user_model()
@@ -45,3 +46,35 @@ def profileview(request):
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class FollowUserView(generics.GenericAPIView):
+    queryset = CustomUser.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, user_id):
+        user_to_follow = get_object_or_404(self.get_queryset(), id=user_id)
+        user = request.user
+
+        if user == user_to_follow:
+            return JsonResponse({"error": "You cannot follow yourself."}, status=400)
+
+        user.following.add(user_to_follow)
+        user_to_follow.followers.add(user)
+
+        return JsonResponse({"message": f"Now following {user_to_follow.username}"})
+
+class UnfollowUserView(generics.GenericAPIView):
+    queryset = CustomUser.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, user_id):
+        user_to_unfollow = get_object_or_404(self.get_queryset(), id=user_id)
+        user = request.user
+
+        if user == user_to_unfollow:
+            return JsonResponse({"error": "You cannot unfollow yourself."}, status=400)
+
+        user.following.remove(user_to_unfollow)
+        user_to_unfollow.followers.remove(user)
+
+        return JsonResponse({"message": f"Unfollowed {user_to_unfollow.username}"})

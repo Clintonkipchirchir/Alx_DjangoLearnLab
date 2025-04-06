@@ -1,18 +1,21 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated 
-
+from django.http import JsonResponse
 from .serializers import PostSerializer, CommentSerializer
 from rest_framework import status
 from .models import Post, Comment
 from rest_framework import viewsets
+from accounts.models import CustomUser
+from rest_framework import generics
+from rest_framework import permissions
 
 # post creation list update delete
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_post(request):
     user = request.user
-    serializer = PostSerializer(data=requst.data)
+    serializer = PostSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save(authour=user)
         return Response(serializer.data)
@@ -56,7 +59,7 @@ def delete_post(request, pk):
 @permission_classes([IsAuthenticated])
 def create_comment(request):
     user = request.user
-    serializer = CommentSerializer(data=requst.data)
+    serializer = CommentSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save(authour=user)
         return Response(serializer.data)
@@ -76,7 +79,7 @@ def update_comment(request, pk):
     comment = Comment.objects.get(id=pk)
     if comment.author != user:
         return Response({"error": "cannot edit comment"}, status=status.HTTP_403_FORBIDDEN)
-    serializer = CommentSerializer(post, data=request.data)
+    serializer = CommentSerializer(Post, data=request.data)
     if serializer.is_valid:
         serializer.save()
         return Response(serializer.data)
@@ -90,9 +93,28 @@ def delete_comment(request, pk):
     comment = Comment.objects.get(id=pk)
     if comment.author != user:
         return Response({"error": "cannot delete comment"}, status=status.HTTP_403_FORBIDDEN)
-    serializer = CommentSerializer(post, data=request.data)
+    serializer = CommentSerializer(Post, data=request.data)
     comment.delete()
     return Response({"message": "Comment succesfully deleted"}, status=status.HTTP_203_NO_CONTENT)
+
+
+class FeedView(generics.GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = CustomUser.objects.all()
+
+    def get(self, request):
+        following_users = request.user.following.all()
+        posts = Post.objects.filter(user__in=following_users).order_by('-created_at')
+        data = [
+            {
+                "user": post.user.username,
+                "content": post.content,
+                "created_at": post.created_at.isoformat()
+            }
+            for post in posts
+        ]
+        return JsonResponse({"feed": data})
+
 
 
 # dummy code

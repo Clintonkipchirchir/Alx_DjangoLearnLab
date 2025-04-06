@@ -1,5 +1,4 @@
 from django.urls import path
-from .views import FollowUserView, UnfollowUserView
 from . import views
 
 app_name = 'posts'
@@ -13,6 +12,5 @@ urlpatterns = [
     path('comment_list/' ,views.comment_list, name='comment_list'),
     path('edit_comment/<int:pk>/' ,views.update_comment, name='edit_comment'),
     path('delete_comment/<int:pk>/' ,views.delete_comment, name='delete_comment'),
-    path('follow/<int:user_id>/', FollowUserView.as_view(), name='follow-user'),
-    path('unfollow/<int:user_id>/', UnfollowUserView.as_view(), name='unfollow-user'),
+    
 ]

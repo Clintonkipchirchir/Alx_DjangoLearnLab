@@ -4,11 +4,14 @@ from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 from .serializers import PostSerializer, CommentSerializer
 from rest_framework import status
-from .models import Post, Comment
+from .models import Post, Comment, Like
 from rest_framework import viewsets
 from accounts.models import CustomUser
 from rest_framework import generics
 from rest_framework import permissions
+from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import get_object_or_404
+from notifications.models import Notification
 
 # post creation list update delete
 @api_view(['POST'])
@@ -116,7 +119,36 @@ class FeedView(generics.GenericAPIView):
         return JsonResponse({"feed": data})
 
 
+class LikePostView(generics.GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
 
+    def post(self, request, pk):
+        post = get_object_or_404(Post, pk=pk)
+        like, created = Like.objects.get_or_create(post=post, user=request.user)
+        if not created:
+            return Response({'detail': 'Already liked'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if post.author != request.user:
+            Notification.objects.create(
+                recipient=post.author,
+                actor=request.user,
+                verb='liked your post',
+                content_type=ContentType.objects.get_for_model(post),
+                object_id=post.id
+            )
+        return Response({'detail': 'Post liked'}, status=status.HTTP_201_CREATED)
+
+class UnlikePostView(generics.GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, pk):
+        post = get_object_or_404(Post, pk=pk)
+        try:
+            like = Like.objects.get(post=post, user=request.user)
+            like.delete()
+            return Response({'detail': 'Post unliked'}, status=status.HTTP_200_OK)
+        except Like.DoesNotExist:
+            return Response({'detail': 'Not liked yet'}, status=status.HTTP_400_BAD_REQUEST)
 # dummy code
 # class MethodViewSet(viewsets.ModelViewSet):
 #     permission_classes = [IsAuthenticated]

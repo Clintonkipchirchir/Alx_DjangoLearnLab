@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from .views import FeedView
+
 
 app_name = 'posts'
 
@@ -12,5 +14,6 @@ urlpatterns = [
     path('comment_list/' ,views.comment_list, name='comment_list'),
     path('edit_comment/<int:pk>/' ,views.update_comment, name='edit_comment'),
     path('delete_comment/<int:pk>/' ,views.delete_comment, name='delete_comment'),
-    
+    path('feed/', FeedView.as_view(), name='feed'),
 ]
+
